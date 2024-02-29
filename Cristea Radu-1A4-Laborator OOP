@@ -31,6 +31,84 @@ int main()
     printf("%d", s);
 }
 
+//Problema 3
+
+
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+char maxcuv[1024], line[1024];
+char final[1024], curentcuv[1024];
+int main()
+{
+   
+    scanf("%[^\n]", line);
+    int lgmax = 0, lg;
+    int i = 0;
+    int ok = 0;
+    int nr;
+    int k = 0, cont = 0;
+    while (line[i] ==' ')
+    {
+        i++;
+    }
+    while (line[i]!='\0')
+    {
+        lg = 0;
+        while (line[i] != ' ')
+        {
+            curentcuv[lg] = line[i];
+            lg++;
+            i++;
+        }
+        if (strlen(curentcuv) > strlen(maxcuv)) { strcpy(maxcuv, curentcuv); ok = 1; nr = i - strlen(maxcuv); }
+        else if (strlen(curentcuv) == strlen(maxcuv))
+        {
+            int j = 0;
+            while (j < strlen(maxcuv) && ok == 0)
+            {
+                if (curentcuv[j] == maxcuv[j])
+                    j++;
+                else if (curentcuv[j] < maxcuv[j])
+                {
+                    strcpy(maxcuv, curentcuv); ok = 1;
+                }
+            }
+            
+        }
+        //sterg cuvantul maxim, adica inlocuiesc caractere cuvantului maxim cu spatii
+        else strcpy(curentcuv, NULL);
+        if (ok==1)
+        {
+            strcat(final, maxcuv); strcat(final, " ");
+            for (int t = nr; t < i; t++) line[t] = ' '; 
+            strcpy(maxcuv, NULL);
+            strcpy(curentcuv,NULL);
+            i = 0;
+        }
+        
+        for (int g = 0; g < strlen(line) && k == 1; g++)
+        {
+            if (line[g] != ' ')
+                k = 1;
+        }
+        
+    }
+    char* p;
+    p = strtok(final," ");
+    while (p)
+    {
+        printf("%s\n", p);
+
+        p = strtok(NULL, " ");
+    }
+}
+
+
+
+
 
 //Problema 4
 
